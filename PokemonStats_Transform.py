@@ -32,6 +32,7 @@ pokemon_per_tour = df.groupby(['tournament', 'pokemon'])['player'].nunique().ren
 # 1. Tournaments
 tournaments = df[['tournament', 'start_date', 'regulation', 'event_level']]
 tournaments = tournaments[['tournament', 'start_date', 'regulation', 'event_level']].drop_duplicates().reset_index(drop=True)
+print(tournaments.head())
 """print(tournaments)"""
 
 # 2. Pokemen Usage
@@ -42,6 +43,9 @@ usage_mons = usage_mons.merge(teams_per_tour, on='tournament')
 usage_mons['usage_perc'] = usage_mons['teams_used'] / usage_mons['total_teams'] * 100
 usage_mons = usage_mons.sort_values(['tournament', 'usage_perc'])
 usage_mons = usage_mons.drop(['total_teams'], axis=1)
+usage_mons['rank'] = usage_mons.groupby('tournament')['teams_used'].rank(method='first', ascending=False).astype(int)
+usage_mons['usage_perc'] = usage_mons['usage_perc'].round(2)
+
 
 # 3. Item Usage
 usage_items = df[['pokemon', 'tournament', 'item', 'player']]
@@ -50,6 +54,7 @@ usage_items = usage_items.merge(pokemon_per_tour, on=['tournament', 'pokemon'])
 
 usage_items['usage_perc'] = usage_items['item_count'] / usage_items['pokemon_count'] * 100
 usage_items = usage_items.drop(['pokemon_count'], axis=1)
+usage_items['usage_perc'] = usage_items['usage_perc'].round(2)
 
 # 4. Move Usage
 move_cols = ['move_1', 'move_2', 'move_3', 'move_4']
@@ -64,8 +69,9 @@ usage_moves = all_moves.groupby(['tournament', 'pokemon', 'move'])['player'].nun
 usage_moves = usage_moves.merge(pokemon_per_tour, on=['tournament', 'pokemon'])
 
 usage_moves['usage_perc'] = usage_moves['move_count'] / usage_moves['pokemon_count'] * 100
+usage_moves = usage_moves.drop(['pokemon_count'], axis=1)
+usage_moves['usage_perc'] = usage_moves['usage_perc'].round(2)
 
-print(usage_moves)
 
 # 5. Tera Usage
 usage_tera = df[['pokemon', 'tournament', 'tera_type', 'player']]
@@ -74,3 +80,15 @@ usage_tera = usage_tera.merge(pokemon_per_tour, on=['tournament', 'pokemon'])
 
 usage_tera['usage_perc'] = usage_tera['teams_used'] / usage_tera['pokemon_count'] * 100
 usage_tera = usage_tera.drop(['pokemon_count'], axis=1)
+usage_tera['usage_perc'] = usage_tera['usage_perc'].round(2)
+
+output_path = 'C:\\Users\\garre\\OneDrive\Desktop\Coding\PokemonStats\summary_tables.xlsx'
+
+with pd.ExcelWriter(output_path, engine='openpyxl', mode='w') as writer:
+    tournaments.to_excel(writer, sheet_name='Tournaments', index=False)
+    usage_mons.to_excel(writer, sheet_name='Pokemon Usage', index=False)
+    usage_items.to_excel(writer, sheet_name='Item Usage', index=False)
+    usage_moves.to_excel(writer, sheet_name='Move Usage', index=False)
+    usage_tera.to_excel(writer, sheet_name='Tera Usage', index=False)
+
+print(f'All tables exported to {output_path}')
