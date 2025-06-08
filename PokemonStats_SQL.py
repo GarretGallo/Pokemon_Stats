@@ -6,10 +6,10 @@ from PokemonStats_Transform import tournaments, usage_items, usage_mons, usage_m
 Base = declarative_base()
 
 #---Database Credentials---#
-USERNAME = 'root'
-PASSWORD = 'GratCode1122'
-HOST = '127.0.0.4:3306'
-DATABASE = 'pokemonstats'
+USERNAME = '***'
+PASSWORD = '***'
+HOST = '***'
+DATABASE = '***'
 
 engine = create_engine(f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}")
 
