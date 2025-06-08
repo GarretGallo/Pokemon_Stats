@@ -1,7 +1,7 @@
 import pandas as pd
 
 #---Load the Data---#
-file_path = 'C:\\Users\\garre\\OneDrive\\Desktop\\Coding\\PokemonStats\\raw_pokemon_data.xlsx'
+file_path = '***'
 sheet_name = 'Masters Data'
 df = pd.read_excel(file_path, sheet_name=sheet_name)
 
@@ -81,14 +81,3 @@ usage_tera = usage_tera.merge(pokemon_per_tour, on=['tournament', 'pokemon'])
 usage_tera['usage_perc'] = usage_tera['teams_used'] / usage_tera['pokemon_count'] * 100
 usage_tera = usage_tera.drop(['pokemon_count'], axis=1)
 usage_tera['usage_perc'] = usage_tera['usage_perc'].round(2)
-
-output_path = 'C:\\Users\\garre\\OneDrive\Desktop\Coding\PokemonStats\summary_tables.xlsx'
-
-with pd.ExcelWriter(output_path, engine='openpyxl', mode='w') as writer:
-    tournaments.to_excel(writer, sheet_name='Tournaments', index=False)
-    usage_mons.to_excel(writer, sheet_name='Pokemon Usage', index=False)
-    usage_items.to_excel(writer, sheet_name='Item Usage', index=False)
-    usage_moves.to_excel(writer, sheet_name='Move Usage', index=False)
-    usage_tera.to_excel(writer, sheet_name='Tera Usage', index=False)
-
-print(f'All tables exported to {output_path}')
