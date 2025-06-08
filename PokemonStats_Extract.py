@@ -114,5 +114,5 @@ for event in events:
 
 df = pd.DataFrame(teams)
 
-path = 'C:\\Users\\garre\\OneDrive\\Desktop\\Coding\\PokemonStats\\raw_pokemon_data.xlsx'
+path = '*INSERT FILE PATH HERE*'
 df.to_excel(path, index=False, sheet_name='Masters Data')
