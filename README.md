@@ -1,4 +1,4 @@
-**GOAL AND OVERVIEW**
+**OVERVIEW**
 
 Every year, tens of thousands of players from around the globe gather to compete in Pokémon VGC tournaments, all dreaming of earning that elusive World Champion title. Success at this level demands meticulous preparation: you need a team that’s fully equipped to navigate the shifting metagame and emerging trends. Unfortunately, official Pokémon resources offer little in the way of actionable statistics, and manually scouring endless Poképastes is both time-consuming and impractical.
 
