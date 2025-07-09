@@ -4,4 +4,4 @@ Every year, tens of thousands of players from around the globe gather to compete
 
 This projects bridges that gap by providing comprehensive, up-to-date analytics on tournament metagames. By aggregating and analyzing data from major events, PokémonStats delivers clear insights into usage patterns, popular strategies, and rising threats — empowering you to make informed decisions, fine-tune your squad, and potentially uncover the next meta-defining breakthrough.
 
-*More detailed docuementation can be seen in PokemonStatsDocumention in the repository*
+*More detailed documentation can be seen in PokemonStatsDocumention in the repository*
